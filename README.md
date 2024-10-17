@@ -1,2 +1,2 @@
 # flowpipe-mod-test
-test Mod for randomness in Flowpipe
+test mod for randomness in Flowpipe
