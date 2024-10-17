@@ -1,3 +1,3 @@
-mod "local" {
+mod "test" {
   title = "flowpipe-mod-test"
 }
