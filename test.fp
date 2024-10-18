@@ -2,8 +2,8 @@ trigger "query" "simple" {
   title = "Simple"
 
   enabled  = true
-  database = var.database
-  sql = local.query
+  database = connection.steampipe.default
+  sql      = local.query
 
   capture "insert" {
     pipeline = pipeline.send_list
@@ -17,8 +17,8 @@ trigger "query" "with_delay" {
   title = "With Delay"
 
   enabled  = true
-  database = var.database
-  sql = local.query
+  database = connection.steampipe.default
+  sql      = local.query
 
   capture "insert" {
     pipeline = pipeline.get_input
@@ -41,18 +41,13 @@ pipeline "send_list" {
     }))
   }
 
-  param "notifier" {
-    type = notifier
-    default = var.notifier
-  }
-
   step "transform" "build_string" {
     value = "${length(param.items)} items: ${join(", ", [for item in param.items : item.name])}"
   }
 
   step "message" "send" {
     text     = "Buckets without tags: ${step.transform.build_string.value}"
-    notifier = param.notifier
+    notifier = notifier.workspace_owners
   }
 }
 
@@ -77,7 +72,7 @@ pipeline "get_input" {
     type   = "button"
     prompt = "This is a delay for purposes of pausing pipeline; respond after it's paused to attempt to resume."
 
-    notifier = var.notifier
+    notifier = notifier.workspace_owners
 
     option "Continue" {}
     option "Yes" {}

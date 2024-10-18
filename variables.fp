@@ -7,5 +7,5 @@ variable "database" {
 variable "notifier" {
   type = notifier
   description = "The notifier to use."
-  default = notifier.default
+  default = notifier.workspace_owners
 }
