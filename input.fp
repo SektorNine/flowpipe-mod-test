@@ -1,5 +1,5 @@
 pipeline "test_single_response" {
-  title "Test Single Response"
+  title = "Test Single Response"
 
   step "input" "question" {
     type = "button"
