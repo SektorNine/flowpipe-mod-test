@@ -47,7 +47,7 @@ pipeline "send_list" {
 
   step "message" "send" {
     text     = "Buckets without tags: ${step.transform.build_string.value}"
-    notifier = notifier.workspace_owners
+    notifier = notifier.default
   }
 }
 
@@ -72,7 +72,7 @@ pipeline "get_input" {
     type   = "button"
     prompt = "This is a delay for purposes of pausing pipeline; respond after it's paused to attempt to resume."
 
-    notifier = notifier.workspace_owners
+    notifier = notifier.default
 
     option "Continue" {}
     option "Yes" {}

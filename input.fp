@@ -16,11 +16,11 @@ pipeline "test_single_response" {
       style = "alert"
     }
 
-    notifier = notifier.workspace_owners
+    notifier = notifier.default
   }
 
   step "message" "answer" {
-    notifier = notifier.workspace_owners
+    notifier = notifier.default
     text     = step.input.question.value
   }
 }
