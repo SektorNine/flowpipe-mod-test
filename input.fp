@@ -1,6 +1,11 @@
 pipeline "test_single_response" {
   title = "Test Single Response"
 
+  param "notifier" {
+    type = notifier
+    default = var.notifier
+  }
+
   step "input" "question" {
     type = "button"
     prompt = "Do you approve?"
@@ -16,11 +21,11 @@ pipeline "test_single_response" {
       style = "alert"
     }
 
-    notifier = notifier.default
+    notifier = param.notifier
   }
 
   step "message" "answer" {
-    notifier = notifier.default
+    notifier = param.notifier
     text     = step.input.question.value
   }
 }

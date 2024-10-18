@@ -41,13 +41,18 @@ pipeline "send_list" {
     }))
   }
 
+  param "notifier" {
+    type = notifier
+    default = var.notifier
+  }
+
   step "transform" "build_string" {
     value = "${length(param.items)} items: ${join(", ", [for item in param.items : item.name])}"
   }
 
   step "message" "send" {
     text     = "Buckets without tags: ${step.transform.build_string.value}"
-    notifier = notifier.default
+    notifier = param.notifier
   }
 }
 
@@ -64,6 +69,11 @@ pipeline "get_input" {
     }))
   }
 
+  param "notifier" {
+    type = notifier
+    default = var.notifier
+  }
+
   step "transform" "build_string" {
     value = "${length(param.items)} items: ${join(", ", [for item in param.items : item.name])}"
   }
@@ -72,7 +82,7 @@ pipeline "get_input" {
     type   = "button"
     prompt = "This is a delay for purposes of pausing pipeline; respond after it's paused to attempt to resume."
 
-    notifier = notifier.default
+    notifier = param.notifier
 
     option "Continue" {}
     option "Yes" {}
