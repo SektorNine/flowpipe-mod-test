@@ -5,8 +5,16 @@ pipeline "test_single_response" {
     type = "button"
     prompt = "Do you approve?"
 
-    option "yes" {}
-    option "no" {}
+    option "yes" {
+      value = "yes"
+      label = "Yes"
+      style = "ok"
+    }
+    option "no" {
+      value = "no"
+      label = "No"
+      style = "alert"
+    }
 
     notifier = notifier.default
   }
