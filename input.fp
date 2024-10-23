@@ -29,3 +29,17 @@ pipeline "test_single_response" {
     text     = step.input.question.value
   }
 }
+
+pipeline "message_me" {
+  title = "Message Me"
+
+  param "notifier" {
+    type = notifier
+    default = var.notifier
+  }
+
+  step "message" "answer" {
+    notifier = param.notifier
+    text     = "HELLO!"
+  }
+}
