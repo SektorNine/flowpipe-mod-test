@@ -92,3 +92,13 @@ pipeline "get_input" {
     value = "${step.input.delay.value}"
   }
 }
+
+pipeline "simple" {
+  step "transform" "transform" {
+    value = "Hello, world!"
+  }
+
+  output "results" {
+    value = step.transform.transform.value
+  }
+}
